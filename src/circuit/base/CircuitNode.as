@@ -9,6 +9,7 @@ public class CircuitNode implements Circuit, CircuitConfig, CircuitOperate
 {
     private var _connected:Boolean = false;
     private var _isLive:Boolean = false;
+    private var _circuitRetreiver:CircuitRetriever;
     private const _breakers:Array = [];
     private const _onStateChange:CircuitStateChangedSignal = new CircuitStateChangedSignal();
 
@@ -60,7 +61,8 @@ public class CircuitNode implements Circuit, CircuitConfig, CircuitOperate
 
     public function getConnectedCircuits():Array
     {
-        return [];
+        if (_circuitRetreiver == null ) _circuitRetreiver = new CircuitRetriever( this );
+        return _circuitRetreiver.getConnectedCircuits( _breakers );
     }
 }
 }
