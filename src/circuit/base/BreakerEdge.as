@@ -1,17 +1,20 @@
 package circuit.base
 {
-import circuit.core.*;
-import circuit.api.Breaker;
+import circuit.api.Circuit;
 import circuit.core.BreakerConfig;
 import circuit.core.BreakerOperate;
-import circuit.api.Circuit;
 import circuit.signals.BreakerStateChangedSignal;
 
-public class BreakerEdge implements Breaker, BreakerConfig, BreakerOperate
+public class BreakerEdge implements BreakerOperate, BreakerConfig
 {
     private var _isClosed:Boolean = true;
     private var _circuitPair:CircuitPair;
     private const _onStateChanged:BreakerStateChangedSignal = new BreakerStateChangedSignal();
+
+    public function BreakerEdge( a:Circuit = null, b:Circuit = null )
+    {
+        if( a != null && b != null )add( a, b );
+    }
 
     public function get onStateChanged():BreakerStateChangedSignal
     {
