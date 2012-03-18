@@ -5,17 +5,16 @@ import circuit.core.CircuitOperate;
 import circuit.core.PowerSupplyConfig;
 import circuit.signals.PowerSupplyChangedSignal;
 
-import org.hamcrest.assertThat;
-import org.hamcrest.object.instanceOf;
-import org.hamcrest.object.isFalse;
-import org.hamcrest.object.isTrue;
-import org.hamcrest.object.strictlyEqualTo;
-
-public class SimplePowerSupply implements PowerSupply, PowerSupplyConfig
+public class SimplePowerSupply implements  PowerSupplyConfig
 {
     private var _isOn:Boolean = false;
     private var _circuit:CircuitOperate = NULL_CIRCUIT;
     private const _onStateChanged:PowerSupplyChangedSignal = new PowerSupplyChangedSignal();
+
+    public function SimplePowerSupply( circuit:CircuitOperate = null )
+    {
+        if ( circuit != null ) _circuit = circuit;
+    }
 
     public function get onStateChanged():PowerSupplyChangedSignal
     {
