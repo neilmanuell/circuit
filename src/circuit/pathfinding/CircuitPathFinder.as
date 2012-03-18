@@ -15,10 +15,13 @@ public class CircuitPathFinder
 
     public function findConnectionsFromPowerSupplies( powerSupplies:Array ):void
     {
-        for each( var powerSupply:PowerSupplyConfig in powerSupplies )
-            if ( powerSupply.isOn )
-                _circuitList.add( powerSupply.circuit );
+        addPowerSupplyConnections( powerSupplies );
+        seekAllConnections();
+        _circuitList.markAllAsConnected();
+    }
 
+    private function seekAllConnections():void
+    {
         while ( _circuitList.hasNext )
         {
             const circuit:CircuitOperate = _circuitList.next();
@@ -26,8 +29,13 @@ public class CircuitPathFinder
             for each ( var c:CircuitOperate in connectedCircuits )
                 _circuitList.add( c );
         }
+    }
 
-        _circuitList.markAllAsConnected();
+    private function addPowerSupplyConnections( powerSupplies:Array ):void
+    {
+        for each( var powerSupply:PowerSupplyConfig in powerSupplies )
+            if ( powerSupply.isOn )
+                _circuitList.add( powerSupply.circuit );
     }
 
 }
