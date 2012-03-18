@@ -23,19 +23,6 @@ public class CircuitBoardTest implements CircuitBoard
     {
     }
 
-    public function addBreaker( breaker:Breaker ):Boolean
-    {
-        return false;
-    }
 
-    public function addCircuit( circuit:Circuit ):Boolean
-    {
-        return false;
-    }
-
-    public function addPowerSupply( powerSupply:PowerSupply ):Boolean
-    {
-        return false;
-    }
 }
 }
