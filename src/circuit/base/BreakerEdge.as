@@ -55,7 +55,7 @@ public class BreakerEdge implements BreakerOperate, BreakerConfig
 
     public function getOtherCircuit( thisCircuit:Circuit ):Circuit
     {
-        if ( _circuitPair == null )return thisCircuit;
+        if ( _circuitPair == null )return NULL_CIRCUIT;
         return _circuitPair.getOtherCircuit( thisCircuit );
     }
 }

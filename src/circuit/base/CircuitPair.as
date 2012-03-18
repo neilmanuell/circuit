@@ -21,7 +21,7 @@ internal class CircuitPair
         if ( thisCircuit === _b )
             return _a;
 
-        return thisCircuit;
+        return NULL_CIRCUIT;
     }
 
     public function has( circuit:Circuit ):Boolean

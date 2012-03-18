@@ -111,9 +111,9 @@ public class BreakerTest
     }
 
     [Test]
-    public function getOtherCircuit_by_default_returns_param():void
+    public function getOtherCircuit_by_default_returns_NULL_CIRCUIT():void
     {
-        assertThat( _classUnderTest.getOtherCircuit( _circuitUnknown ), strictlyEqualTo( _circuitUnknown ) );
+        assertThat( _classUnderTest.getOtherCircuit( _circuitUnknown ), strictlyEqualTo( NULL_CIRCUIT ) );
     }
 
     [Test]
@@ -131,10 +131,10 @@ public class BreakerTest
     }
 
     [Test]
-    public function getOtherCircuit_give_unknown_returns_unknown():void
+    public function getOtherCircuit_give_unknown_returns_NULL_CIRCUIT():void
     {
         _classUnderTest.add( _circuitA, _circuitB );
-        assertThat( _classUnderTest.getOtherCircuit( _circuitUnknown ), strictlyEqualTo( _circuitUnknown ) );
+        assertThat( _classUnderTest.getOtherCircuit( _circuitUnknown ), strictlyEqualTo( NULL_CIRCUIT ) );
     }
 
     [Test]
