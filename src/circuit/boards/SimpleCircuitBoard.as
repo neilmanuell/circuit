@@ -4,28 +4,18 @@ import circuit.api.Breaker;
 import circuit.api.Circuit;
 import circuit.api.CircuitBoard;
 import circuit.api.PowerSupply;
-import circuit.base.*;
-import circuit.core.CircuitOperate;
+import circuit.base.CircuitOperateList;
 import circuit.pathfinding.CircuitPathFinder;
+
+import net.lists.LinkedList;
 
 public class SimpleCircuitBoard implements CircuitBoard
 {
-
-    private const _breakers:BreakerGroup = new BreakerGroup();
-    private const _circuits:CircuitOperateList = new CircuitOperateList();
-    private const _powerSupplies:PowerSupplyGroup = new PowerSupplyGroup();
+    private const _breakers:LinkedList = new LinkedList();
+    private const _circuits:LinkedList = new LinkedList();
+    private const _circuitOperateList:CircuitOperateList = new CircuitOperateList();
+    private const _powerSupplies:LinkedList = new LinkedList();
     private const _pathfinder:CircuitPathFinder = new CircuitPathFinder();
-
-    public function SimpleCircuitBoard()
-    {
-        initiate();
-    }
-
-    private function initiate():void
-    {
-        _breakers.onStateChanged.add( onBreakerStateChanged );
-        _powerSupplies.onStateChanged.add( onPowerSuppliesStateChanged )
-    }
 
     private function onBreakerStateChanged( breaker:Breaker ):void
     {
@@ -39,26 +29,35 @@ public class SimpleCircuitBoard implements CircuitBoard
 
     private function pathfind():void
     {
-        _circuits.invalidateAll();
-        _pathfinder.findConnectionsFromPowerSupplies(_powerSupplies);
-        _circuits.validateAll();
+        _circuitOperateList.client = _circuits;
+        _circuitOperateList.invalidateAll();
+        _pathfinder.findConnectionsFromPowerSupplies( _powerSupplies );
+        _circuitOperateList.validateAll();
         _pathfinder.reset();
 
     }
 
     public function addBreaker( breaker:Breaker ):Boolean
     {
-        return _breakers.add( breaker );
+        if ( _breakers.has( breaker ) ) return false;
+        breaker.onStateChanged.add( onBreakerStateChanged );
+        _breakers.add( breaker );
+        return true;
     }
 
     public function addCircuit( circuit:Circuit ):Boolean
     {
-        return _circuits.add( circuit as CircuitOperate );
+        if ( _circuits.has( circuit ) ) return false;
+        _circuits.add( circuit );
+        return true;
     }
 
     public function addPowerSupply( powerSupply:PowerSupply ):Boolean
     {
-        return _powerSupplies.add( powerSupply );
+        if ( _powerSupplies.has( powerSupply ) ) return false;
+        powerSupply.onStateChanged.add( onPowerSuppliesStateChanged );
+        _powerSupplies.add( powerSupply );
+        return true;
     }
 }
 }

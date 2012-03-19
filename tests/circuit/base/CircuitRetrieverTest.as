@@ -1,12 +1,14 @@
 package circuit.base
 {
+import net.lists.LinkedList;
+import net.lists.nodes.ListNode;
+
 import org.hamcrest.assertThat;
-import org.hamcrest.collection.array;
-import org.hamcrest.collection.emptyArray;
+import org.hamcrest.core.not;
 
 public class CircuitRetrieverTest
 {
-    private var _received:Boolean = false;
+    private var _breakerLinkedList:LinkedList
     private var _classUnderTest:CircuitRetriever;
     private var _circuitA:CircuitNode;
     private var _circuitB:CircuitNode;
@@ -38,10 +40,12 @@ public class CircuitRetrieverTest
         _breakerAB.close();
         _breakerAC.close();
         _breakerAD.open();
-        const received:Array = _classUnderTest.getConnectedCircuits( [_breakerAB, _breakerAC, _breakerAD] );
 
-        assertThat( received, array( _circuitB, _circuitC ) );
+        const received:LinkedList = _classUnderTest.getConnectedCircuits( _breakerLinkedList );
+
+        assertLinkList( received, [ _circuitB, _circuitC ] );
     }
+
 
     [Test]
     public function one_breaker_closed():void
@@ -49,10 +53,11 @@ public class CircuitRetrieverTest
         _breakerAB.open();
         _breakerAC.open();
         _breakerAD.close();
-        const received:Array = _classUnderTest.getConnectedCircuits( [_breakerAB, _breakerAC, _breakerAD] );
+        const received:LinkedList = _classUnderTest.getConnectedCircuits( _breakerLinkedList );
 
-        assertThat( received, array( _circuitD ) );
+        assertLinkList( received, [ _circuitD ] );
     }
+
 
     [Test]
     public function all_breakers_closed():void
@@ -60,19 +65,20 @@ public class CircuitRetrieverTest
         _breakerAB.close();
         _breakerAC.close();
         _breakerAD.close();
-        const received:Array = _classUnderTest.getConnectedCircuits( [_breakerAB, _breakerAC, _breakerAD] );
+        const received:LinkedList = _classUnderTest.getConnectedCircuits( _breakerLinkedList );
 
-        assertThat( received, array( _circuitB, _circuitC, _circuitD ) );
+        assertLinkList( received, [ _circuitB, _circuitC, _circuitD ] );
     }
+
     [Test]
     public function all_breakers_opened():void
     {
         _breakerAB.open();
         _breakerAC.open();
         _breakerAD.open();
-        const received:Array = _classUnderTest.getConnectedCircuits( [_breakerAB, _breakerAC, _breakerAD] );
+        const received:LinkedList = _classUnderTest.getConnectedCircuits( _breakerLinkedList );
 
-        assertThat( received,  emptyArray()  );
+        assertLinkList( received, [  ] );
     }
 
 
@@ -95,7 +101,18 @@ public class CircuitRetrieverTest
         _circuitC.add( _breakerAC );
         _circuitD.add( _breakerAD );
 
+        _breakerLinkedList = new LinkedList();
+        _breakerLinkedList.add( _breakerAB );
+        _breakerLinkedList.add( _breakerAC );
+        _breakerLinkedList.add( _breakerAD )  ;
+    }
 
+    private function assertLinkList( received:LinkedList, toMatch:Array ):void
+    {
+        for ( var node:ListNode = received.head; node; node = node.next )
+        {
+            assertThat( toMatch.indexOf( node.data ), not( -1 ) );
+        }
     }
 
 

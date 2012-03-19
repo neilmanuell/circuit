@@ -2,6 +2,8 @@ package circuit.pathfinding
 {
 import circuit.base.*;
 
+import net.lists.LinkedList;
+
 import org.hamcrest.assertThat;
 import org.hamcrest.object.equalTo;
 
@@ -21,9 +23,10 @@ public class BaseCircuitPathFinderTest
     private var _breakerAD:BreakerEdge;
     private var _breakerDE:BreakerEdge;
 
-    private var _circuitReg:CircuitOperateList;
+    private var _circuitList:LinkedList;
+    private var _circuitOperateList:CircuitOperateList;
     private var _classUnderTest:CircuitPathFinder;
-    private var _powerSupplyGroup:PowerSupplyGroup;
+    private var _powerSupplies:LinkedList;
 
     [Before]
     public final function before():void
@@ -36,7 +39,7 @@ public class BaseCircuitPathFinderTest
     public final function after():void
     {
         _classUnderTest = null;
-        _powerSupplyGroup = null;
+        _powerSupplies = null;
         _circuitA = null;
         _circuitB = null;
         _circuitC = null;
@@ -56,9 +59,10 @@ public class BaseCircuitPathFinderTest
     protected final function runPathfinding():void
     {
         configureCircuit();
-        _circuitReg.invalidateAll();
-        _classUnderTest.findConnectionsFromPowerSupplies( _powerSupplyGroup );
-        _circuitReg.validateAll();
+        _circuitOperateList.client = _circuitList;
+        _circuitOperateList.invalidateAll();
+        _classUnderTest.findConnectionsFromPowerSupplies( _powerSupplies );
+        _circuitOperateList.validateAll();
     }
 
     protected function configureCircuit():void
@@ -96,11 +100,11 @@ public class BaseCircuitPathFinderTest
 
     private function createData():void
     {
-        _circuitA = new CircuitNode();
-        _circuitB = new CircuitNode();
-        _circuitC = new CircuitNode();
-        _circuitD = new CircuitNode();
-        _circuitE = new CircuitNode();
+        _circuitA = new CircuitNode("A");
+        _circuitB = new CircuitNode("B");
+        _circuitC = new CircuitNode("C");
+        _circuitD = new CircuitNode("D");
+        _circuitE = new CircuitNode("E");
 
         _breakerAB = new BreakerEdge( _circuitA, _circuitB );
         _breakerAC = new BreakerEdge( _circuitA, _circuitC );
@@ -122,16 +126,18 @@ public class BaseCircuitPathFinderTest
         _powerOne = new SimplePowerSupply( _circuitB );
         _powerTwo = new SimplePowerSupply( _circuitE );
 
-        _circuitReg = new CircuitOperateList();
-        _circuitReg.add( _circuitA );
-        _circuitReg.add( _circuitB );
-        _circuitReg.add( _circuitC );
-        _circuitReg.add( _circuitD );
-        _circuitReg.add( _circuitE );
+        _circuitList = new LinkedList();
+        _circuitList.add( _circuitA );
+        _circuitList.add( _circuitB );
+        _circuitList.add( _circuitC );
+        _circuitList.add( _circuitD );
+        _circuitList.add( _circuitE );
 
-        _powerSupplyGroup = new PowerSupplyGroup()
-        _powerSupplyGroup.add( _powerOne );
-        _powerSupplyGroup.add( _powerTwo );
+        _powerSupplies = new LinkedList()
+        _powerSupplies.add( _powerOne );
+        _powerSupplies.add( _powerTwo );
+
+        _circuitOperateList = new CircuitOperateList();
 
     }
 

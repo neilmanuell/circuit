@@ -3,6 +3,9 @@ package circuit.base
 import circuit.api.Circuit;
 import circuit.core.BreakerOperate;
 
+import net.lists.LinkedList;
+import net.lists.nodes.ListNode;
+
 public class CircuitRetriever
 {
     private var _clientCircuit:Circuit;
@@ -13,17 +16,18 @@ public class CircuitRetriever
 
     }
 
-    public function getConnectedCircuits( breakers:Array ):Array
+    public function getConnectedCircuits( breakers:LinkedList ):LinkedList
     {
-        const a:Array = [];
-        for each ( var breaker:BreakerOperate in breakers )
+        const list:LinkedList = new LinkedList();
+
+        for ( var node:ListNode = breakers.head; node; node = node.next )
         {
-            if ( breaker.isClosed )
-            {
-                a.push( breaker.getOtherCircuit( _clientCircuit ) );
-            }
+            const breaker:BreakerOperate = node.data;
+            if ( breaker.isClosed && !list.has( breaker ) )
+                list.add( breaker.getOtherCircuit( _clientCircuit ) );
         }
-        return a;
+
+        return list;
     }
 
 
