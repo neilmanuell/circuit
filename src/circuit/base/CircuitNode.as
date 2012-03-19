@@ -5,13 +5,22 @@ import circuit.api.Circuit;
 import circuit.core.*;
 import circuit.signals.CircuitStateChangedSignal;
 
+import net.lists.LinkedList;
+
 public class CircuitNode implements Circuit, CircuitConfig, CircuitOperate
 {
-    private var _connected:Boolean = false;
+    private var _isConnected:Boolean = false;
     private var _isLive:Boolean = false;
     private var _circuitRetreiver:CircuitRetriever;
-    private const _breakers:Array = [];
+    private const _breakers:LinkedList = new LinkedList();
     private const _onStateChange:CircuitStateChangedSignal = new CircuitStateChangedSignal();
+    private var _id:String;
+
+
+    public function CircuitNode( id:String = "" )
+    {
+        _id = id;
+    }
 
     public function get onStateChanged():CircuitStateChangedSignal
     {
@@ -26,43 +35,45 @@ public class CircuitNode implements Circuit, CircuitConfig, CircuitOperate
     public function add( breaker:Breaker ):Boolean
     {
         if ( has( breaker ) ) return false;
-        _breakers.push( breaker );
+        _breakers.add( breaker );
         return true;
     }
 
     public function has( breaker:Breaker ):Boolean
     {
-        return (_breakers.indexOf( breaker ) != -1);
+        return (_breakers.has( breaker ));
     }
 
     public function invalidate():void
     {
-        _connected = false;
+        _isConnected = false;
     }
 
     public function markAsConnected():void
     {
-        _connected = true;
+        _isConnected = true;
     }
 
     public function validate():void
     {
-        if ( _connected && !_isLive )
+        if ( _isConnected && !_isLive )
         {
             _isLive = true;
             _onStateChange.dispatchCircuit( this );
         }
-        else if ( !_connected && _isLive )
+        else if ( !_isConnected && _isLive )
         {
             _isLive = false;
             _onStateChange.dispatchCircuit( this );
         }
     }
 
-    public function getConnectedCircuits():Array
+    public function getConnectedCircuits():LinkedList
     {
-        if (_circuitRetreiver == null ) _circuitRetreiver = new CircuitRetriever( this );
+        if ( _circuitRetreiver == null ) _circuitRetreiver = new CircuitRetriever( this );
         return _circuitRetreiver.getConnectedCircuits( _breakers );
     }
+
+
 }
 }

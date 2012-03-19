@@ -41,6 +41,8 @@ public class CircuitTest
     [After]
     public function after():void
     {
+        _classUnderTest = null;
+        _breakerA = null;
     }
 
 
@@ -50,12 +52,14 @@ public class CircuitTest
         assertThat( _classUnderTest.isLive, isFalse() );
     }
 
+
     [Test]
     public function markAsConnected_sets_isLive_true():void
     {
         makeLive()
         assertThat( _classUnderTest.isLive, isTrue() );
     }
+
 
     [Test]
     public function not_calling_markAsConnected_sets_isLive_false():void
