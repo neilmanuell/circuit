@@ -13,9 +13,9 @@ public class CircuitPathFinder
         _circuitList.reset();
     }
 
-    public function findConnectionsFromPowerSupplies( powerSupplies:Array ):void
+    public function findConnectionsFromPowerSupplies( powerSupplies:PowerSupplyGroup ):void
     {
-        addPowerSupplyConnections( powerSupplies );
+        addPowerSupplyConnections( powerSupplies.getActive() );
         seekAllConnections();
         _circuitList.markAllAsConnected();
     }
@@ -34,8 +34,7 @@ public class CircuitPathFinder
     private function addPowerSupplyConnections( powerSupplies:Array ):void
     {
         for each( var powerSupply:PowerSupplyConfig in powerSupplies )
-            if ( powerSupply.isOn )
-                _circuitList.add( powerSupply.circuit );
+            _circuitList.add( powerSupply.circuit );
     }
 
 }

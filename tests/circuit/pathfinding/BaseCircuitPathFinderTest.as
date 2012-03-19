@@ -23,6 +23,7 @@ public class BaseCircuitPathFinderTest
 
     private var _circuitReg:CircuitOperateList;
     private var _classUnderTest:CircuitPathFinder;
+    private var _powerSupplyGroup:PowerSupplyGroup;
 
     [Before]
     public final function before():void
@@ -35,6 +36,7 @@ public class BaseCircuitPathFinderTest
     public final function after():void
     {
         _classUnderTest = null;
+        _powerSupplyGroup = null;
         _circuitA = null;
         _circuitB = null;
         _circuitC = null;
@@ -55,7 +57,7 @@ public class BaseCircuitPathFinderTest
     {
         configureCircuit();
         _circuitReg.invalidateAll();
-        _classUnderTest.findConnectionsFromPowerSupplies( [_powerOne, _powerTwo] );
+        _classUnderTest.findConnectionsFromPowerSupplies( _powerSupplyGroup );
         _circuitReg.validateAll();
     }
 
@@ -127,6 +129,9 @@ public class BaseCircuitPathFinderTest
         _circuitReg.add( _circuitD );
         _circuitReg.add( _circuitE );
 
+        _powerSupplyGroup = new PowerSupplyGroup()
+        _powerSupplyGroup.add( _powerOne );
+        _powerSupplyGroup.add( _powerTwo );
 
     }
 
