@@ -2,9 +2,9 @@ package circuit.signals
 {
 import circuit.api.PowerSupply;
 
-import org.osflash.signals.Signal;
+import net.richardlord.ash.signals.Signal1;
 
-public class PowerSupplyChangedSignal extends Signal
+public class PowerSupplyChangedSignal extends Signal1
 {
     public function PowerSupplyChangedSignal(  )
     {

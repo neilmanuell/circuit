@@ -2,9 +2,9 @@ package circuit.signals
 {
 import circuit.api.Breaker;
 
-import org.osflash.signals.Signal;
+import net.richardlord.ash.signals.Signal1;
 
-public class BreakerStateChangedSignal extends Signal
+public class BreakerStateChangedSignal extends Signal1
 {
     public function BreakerStateChangedSignal(  )
     {
