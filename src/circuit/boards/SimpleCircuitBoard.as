@@ -16,32 +16,38 @@ public class SimpleCircuitBoard implements CircuitBoard
     private const _powerSupplies:LinkedList = new LinkedList();
     private const _circuitOperateList:CircuitOperateList = new CircuitOperateList();
     private const _pathfinder:CircuitPathFinder = new CircuitPathFinder();
-    private var _doLater:Boolean = false;
+    private var _hasChanged:Boolean = false;
     private var _isPathFinding:Boolean = false;
 
     private function onChildStateChanged( item:* ):void
     {
         if ( _isPathFinding )
-            _doLater = true;
+            _hasChanged = true;
         else
-            pathfind();
+        {
+            do {
+                pathfind();
+            }
+            while ( _hasChanged )
+
+        }
+    }
+
+    public function activate():void
+    {
+        pathfind();
     }
 
     private function pathfind():void
     {
+        _hasChanged = false;
         _isPathFinding = true;
         _circuitOperateList.client = _circuits;
         _circuitOperateList.invalidateAll();
         _pathfinder.findConnectionsFromPowerSupplies( _powerSupplies );
-        _circuitOperateList.validateAll();
         _pathfinder.reset();
-
-        if ( _doLater )
-        {
-            _doLater = false;
-            pathfind();
-        } else
-            _isPathFinding = false;
+        _circuitOperateList.validateAll();
+        _isPathFinding = false;
 
     }
 

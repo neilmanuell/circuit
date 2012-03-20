@@ -12,6 +12,7 @@ public class CircuitBoardTest_BothSuppliesOn_B extends BaseCircuitBoardTest
     protected function configureCircuit():void
     {
         configureOpenBreakers( true, false, false, true );
+        assembleBoard();
         switchOnPowerSupplyOne();
         switchOnPowerSupplyTwo();
     }

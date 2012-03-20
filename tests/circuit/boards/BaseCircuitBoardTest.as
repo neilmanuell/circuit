@@ -1,9 +1,6 @@
 package circuit.boards
 {
 import circuit.base.*;
-import circuit.pathfinding.*;
-
-import net.lists.LinkedList;
 
 import org.hamcrest.assertThat;
 import org.hamcrest.object.equalTo;
@@ -13,16 +10,16 @@ public class BaseCircuitBoardTest
     private var _powerOne:SimplePowerSupply;
     private var _powerTwo:SimplePowerSupply;
 
-    private var _circuitA:CircuitNode;
-    private var _circuitB:CircuitNode;
-    private var _circuitC:CircuitNode;
-    private var _circuitD:CircuitNode;
-    private var _circuitE:CircuitNode;
+    protected var _circuitA:CircuitNode;
+    protected var _circuitB:CircuitNode;
+    protected var _circuitC:CircuitNode;
+    protected var _circuitD:CircuitNode;
+    protected var _circuitE:CircuitNode;
 
-    private var _breakerAB:BreakerEdge;
-    private var _breakerAC:BreakerEdge;
-    private var _breakerAD:BreakerEdge;
-    private var _breakerDE:BreakerEdge;
+    protected var _breakerAB:BreakerEdge;
+    protected var _breakerAC:BreakerEdge;
+    protected var _breakerAD:BreakerEdge;
+    protected var _breakerDE:BreakerEdge;
 
     private var _classUnderTest:SimpleCircuitBoard;
 
@@ -58,10 +55,21 @@ public class BaseCircuitBoardTest
         _powerOne.switchOn();
     }
 
+    protected final function switchOffPowerSupplyOne():void
+    {
+        _powerOne.switchOff();
+    }
+
     protected final function switchOnPowerSupplyTwo():void
     {
         _powerTwo.switchOn();
     }
+
+    protected final function switchOffPowerSupplyTwo():void
+    {
+        _powerTwo.switchOff();
+    }
+
 
     protected final function configureOpenBreakers( AB:Boolean, AC:Boolean, AD:Boolean, DE:Boolean ):void
     {
@@ -80,14 +88,34 @@ public class BaseCircuitBoardTest
         assertThat( "circuitE", _circuitE.isLive, equalTo( E ) );
     }
 
+    protected final function assembleBoard():void
+    {
+        _classUnderTest.addBreaker( _breakerAB );
+        _classUnderTest.addBreaker( _breakerAC );
+        _classUnderTest.addBreaker( _breakerAD );
+        _classUnderTest.addBreaker( _breakerDE );
+
+        _classUnderTest.addCircuit( _circuitA );
+        _classUnderTest.addCircuit( _circuitB );
+        _classUnderTest.addCircuit( _circuitC );
+        _classUnderTest.addCircuit( _circuitD );
+        _classUnderTest.addCircuit( _circuitE );
+
+        _classUnderTest.addPowerSupply( _powerOne );
+        _classUnderTest.addPowerSupply( _powerTwo );
+        _classUnderTest.activate();
+    }
+
+
+
 
     private function createData():void
     {
-        _circuitA = new CircuitNode("A");
-        _circuitB = new CircuitNode("B");
-        _circuitC = new CircuitNode("C");
-        _circuitD = new CircuitNode("D");
-        _circuitE = new CircuitNode("E");
+        _circuitA = new CircuitNode( "A" );
+        _circuitB = new CircuitNode( "B" );
+        _circuitC = new CircuitNode( "C" );
+        _circuitD = new CircuitNode( "D" );
+        _circuitE = new CircuitNode( "E" );
 
         _breakerAB = new BreakerEdge( _circuitA, _circuitB );
         _breakerAC = new BreakerEdge( _circuitA, _circuitC );
@@ -109,19 +137,6 @@ public class BaseCircuitBoardTest
         _powerOne = new SimplePowerSupply( _circuitB );
         _powerTwo = new SimplePowerSupply( _circuitE );
 
-        _classUnderTest.addBreaker(_breakerAB);
-        _classUnderTest.addBreaker(_breakerAC);
-        _classUnderTest.addBreaker(_breakerAD);
-        _classUnderTest.addBreaker(_breakerDE);
-
-        _classUnderTest.addCircuit(_circuitA);
-        _classUnderTest.addCircuit(_circuitB);
-        _classUnderTest.addCircuit(_circuitC);
-        _classUnderTest.addCircuit(_circuitD);
-        _classUnderTest.addCircuit(_circuitE);
-
-        _classUnderTest.addPowerSupply(_powerOne);
-        _classUnderTest.addPowerSupply(_powerTwo);
 
     }
 

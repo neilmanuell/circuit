@@ -12,6 +12,7 @@ public class CircuitBoardTest_PS1_off_PS2_on extends BaseCircuitBoardTest
     protected function configureCircuit():void
     {
         configureOpenBreakers( false, false, true, true );
+        assembleBoard();
         switchOnPowerSupplyTwo();
     }
 }
