@@ -9,12 +9,12 @@ import net.lists.LinkedList;
 
 public class CircuitNode implements Circuit, CircuitConfig, CircuitOperate
 {
+    private var _id:String;
     private var _isConnected:Boolean = false;
     private var _isLive:Boolean = false;
     private var _circuitRetreiver:CircuitRetriever;
     private const _breakers:LinkedList = new LinkedList();
     private const _onStateChange:CircuitStateChangedSignal = new CircuitStateChangedSignal();
-    private var _id:String;
 
 
     public function CircuitNode( id:String = "" )

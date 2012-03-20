@@ -14,8 +14,7 @@ public class CircuitPathFinder
 
     public function reset():void
     {
-        _circuitList.head = null;
-        _circuitList.tail = null;
+        _circuitList.flush();
         _circuitOperateList.client = null;
     }
 

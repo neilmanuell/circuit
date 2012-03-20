@@ -5,10 +5,10 @@ public class CircuitPathFinderTest_BothSuppliesOff extends BaseCircuitPathFinder
 
 
     [Test]
-    public function both_powerSupplies_on():void
+    public function test():void
     {
-       /* runPathfinding();
-        assertLiveCircuits( false, false, false, false, false );*/
+        runPathfinding();
+        assertLiveCircuits( false, false, false, false, false );
     }
 
     protected override function configureCircuit():void

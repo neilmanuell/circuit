@@ -10,6 +10,11 @@ public class LinkedList
     public var tail:ListNode;
     private var nodes:Dictionary = new Dictionary( true );
 
+    public function flush():void{
+        head = null;
+        tail = null;
+        nodes = new Dictionary(true);
+    }
     public function add( data:* ):ListNode
     {
         var node:ListNode = new ListNode();

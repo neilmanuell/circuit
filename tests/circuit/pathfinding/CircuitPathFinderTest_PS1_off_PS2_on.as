@@ -5,7 +5,7 @@ public class CircuitPathFinderTest_PS1_off_PS2_on extends BaseCircuitPathFinderT
 
 
     [Test]
-    public function both_powerSupplies_on():void
+    public function test():void
     {
         runPathfinding();
         assertLiveCircuits( false, false, false, false, true );
