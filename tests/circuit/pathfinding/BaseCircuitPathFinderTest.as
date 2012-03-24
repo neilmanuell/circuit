@@ -106,10 +106,10 @@ public class BaseCircuitPathFinderTest
         _circuitD = new CircuitNode("D");
         _circuitE = new CircuitNode("E");
 
-        _breakerAB = new BreakerEdge( _circuitA, _circuitB );
-        _breakerAC = new BreakerEdge( _circuitA, _circuitC );
-        _breakerAD = new BreakerEdge( _circuitA, _circuitD );
-        _breakerDE = new BreakerEdge( _circuitD, _circuitE );
+        _breakerAB = new BreakerEdge( "AB",_circuitA, _circuitB );
+        _breakerAC = new BreakerEdge( "AC",_circuitA, _circuitC );
+        _breakerAD = new BreakerEdge( "AD",_circuitA, _circuitD );
+        _breakerDE = new BreakerEdge( "DE",_circuitD, _circuitE );
 
         _circuitA.add( _breakerAB );
         _circuitA.add( _breakerAC );
@@ -123,8 +123,8 @@ public class BaseCircuitPathFinderTest
 
         _circuitE.add( _breakerDE );
 
-        _powerOne = new SimplePowerSupply( _circuitB );
-        _powerTwo = new SimplePowerSupply( _circuitE );
+        _powerOne = new SimplePowerSupply( "SP1",_circuitB );
+        _powerTwo = new SimplePowerSupply( "SP2",_circuitE );
 
         _circuitList = new LinkedList();
         _circuitList.add( _circuitA );

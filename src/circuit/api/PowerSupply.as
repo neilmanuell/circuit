@@ -6,6 +6,7 @@ public interface PowerSupply
 {
     function get onStateChanged():PowerSupplyChangedSignal
     function get isOn():Boolean;
+    function get id():String
     function  switchOn():void;
     function switchOff():void;
 

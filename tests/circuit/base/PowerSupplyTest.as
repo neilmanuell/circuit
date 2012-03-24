@@ -14,11 +14,12 @@ public class PowerSupplyTest
 {
     private var _received:Boolean = false;
     private var _classUnderTest:SimplePowerSupply;
+    private var _id:String = "testPS" ;
 
     [Before]
     public function before():void
     {
-        _classUnderTest = new SimplePowerSupply();
+        _classUnderTest = new SimplePowerSupply( _id );
     }
 
 
@@ -51,7 +52,7 @@ public class PowerSupplyTest
     [Test]
     public function circuit_setter():void
     {
-        const expected:CircuitOperate = new CircuitNode();
+        const expected:CircuitOperate = new CircuitNode("testCircuit");
         _classUnderTest.circuit = expected;
         assertThat( _classUnderTest.circuit, strictlyEqualTo( expected ) );
     }

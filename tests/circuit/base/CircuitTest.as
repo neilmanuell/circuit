@@ -33,7 +33,7 @@ public class CircuitTest
     [Before(order=2)]
     public function before():void
     {
-        _classUnderTest = new CircuitNode();
+        _classUnderTest = new CircuitNode("testCircuit");
         _breakerA = nice( Breaker )
     }
 

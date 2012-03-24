@@ -7,12 +7,15 @@ import circuit.signals.PowerSupplyChangedSignal;
 
 public class SimplePowerSupply implements  PowerSupplyConfig
 {
+
     private var _isOn:Boolean = false;
     private var _circuit:CircuitOperate = NULL_CIRCUIT;
     private const _onStateChanged:PowerSupplyChangedSignal = new PowerSupplyChangedSignal();
+    private var _id:String;
 
-    public function SimplePowerSupply( circuit:CircuitOperate = null )
+    public function SimplePowerSupply( id:String, circuit:CircuitOperate = null )
     {
+        _id = id;
         if ( circuit != null ) _circuit = circuit;
     }
 
@@ -51,5 +54,9 @@ public class SimplePowerSupply implements  PowerSupplyConfig
     }
 
 
+    public function get id():String
+    {
+        return _id;
+    }
 }
 }

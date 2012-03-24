@@ -84,14 +84,14 @@ public class CircuitRetrieverTest
 
     private function configureCircuitBoard():void
     {
-        _circuitA = new CircuitNode();
-        _circuitB = new CircuitNode();
-        _circuitC = new CircuitNode();
-        _circuitD = new CircuitNode();
+        _circuitA = new CircuitNode("A");
+        _circuitB = new CircuitNode("B");
+        _circuitC = new CircuitNode("C");
+        _circuitD = new CircuitNode("D");
 
-        _breakerAB = new BreakerEdge( _circuitA, _circuitB );
-        _breakerAC = new BreakerEdge( _circuitA, _circuitC );
-        _breakerAD = new BreakerEdge( _circuitA, _circuitD );
+        _breakerAB = new BreakerEdge( "AB", _circuitA, _circuitB );
+        _breakerAC = new BreakerEdge( "AC",_circuitA, _circuitC );
+        _breakerAD = new BreakerEdge( "AD",_circuitA, _circuitD );
 
         _circuitA.add( _breakerAB );
         _circuitA.add( _breakerAC );

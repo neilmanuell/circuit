@@ -17,7 +17,7 @@ public class CircuitNode implements Circuit, CircuitConfig, CircuitOperate
     private const _onStateChange:CircuitStateChangedSignal = new CircuitStateChangedSignal();
 
 
-    public function CircuitNode( id:String = "" )
+    public function CircuitNode( id:String )
     {
         _id = id;
     }
@@ -75,5 +75,9 @@ public class CircuitNode implements Circuit, CircuitConfig, CircuitOperate
     }
 
 
+    public function get id():String
+    {
+        return _id;
+    }
 }
 }

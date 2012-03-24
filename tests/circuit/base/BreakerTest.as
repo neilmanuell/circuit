@@ -24,6 +24,7 @@ public class BreakerTest
     private var _circuitUnknown:Circuit;
     private var _classUnderTest:BreakerEdge;
     private var _received:Boolean;
+    private var _id:String = "testBreaker"  ;
 
     [Before(order=1, async, timeout=5000)]
     public function prepareMockolates():void
@@ -39,7 +40,7 @@ public class BreakerTest
         _circuitA = nice( Circuit );
         _circuitB = nice( Circuit );
         _circuitUnknown = nice( Circuit );
-        _classUnderTest = new BreakerEdge();
+        _classUnderTest = new BreakerEdge(_id);
         _received = false;
     }
 

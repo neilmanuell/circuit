@@ -10,9 +10,11 @@ public class BreakerEdge implements BreakerOperate, BreakerConfig
     private var _isClosed:Boolean = true;
     private var _circuitPair:CircuitPair;
     private const _onStateChanged:BreakerStateChangedSignal = new BreakerStateChangedSignal();
+    private var _id:String;
 
-    public function BreakerEdge( a:Circuit = null, b:Circuit = null )
+    public function BreakerEdge( id:String, a:Circuit = null, b:Circuit = null )
     {
+        _id = id;
         if( a != null && b != null )add( a, b );
     }
 
@@ -57,6 +59,11 @@ public class BreakerEdge implements BreakerOperate, BreakerConfig
     {
         if ( _circuitPair == null )return NULL_CIRCUIT;
         return _circuitPair.getOtherCircuit( thisCircuit );
+    }
+
+    public function get id():String
+    {
+        return _id;
     }
 }
 }
