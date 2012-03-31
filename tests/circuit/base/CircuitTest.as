@@ -1,7 +1,7 @@
 package circuit.base
 {
-import circuit.api.Breaker;
-import circuit.api.Circuit;
+import circuit.api.Edge;
+import circuit.api.Node;
 import circuit.signals.CircuitStateChangedSignal;
 
 import flash.events.Event;
@@ -18,23 +18,23 @@ import org.hamcrest.object.isTrue;
 public class CircuitTest
 {
 
-    private var _classUnderTest:CircuitNode;
-    private var _breakerA:Breaker;
+    private var _classUnderTest:SimpleCircuitNode;
+    private var _breakerA:Edge;
     private var _received:Boolean;
 
     [Before(order=1, async, timeout=5000)]
     public function prepareMockolates():void
     {
         Async.proceedOnEvent( this,
-                prepare( Breaker ),
+                prepare( Edge ),
                 Event.COMPLETE );
     }
 
     [Before(order=2)]
     public function before():void
     {
-        _classUnderTest = new CircuitNode("testCircuit");
-        _breakerA = nice( Breaker )
+        _classUnderTest = new SimpleCircuitNode( "testCircuit" );
+        _breakerA = nice( Edge )
     }
 
 
@@ -147,7 +147,7 @@ public class CircuitTest
     }
 
 
-    private function circuitListener( circuit:Circuit ):void
+    private function circuitListener( circuit:Node ):void
     {
         _received = true;
     }

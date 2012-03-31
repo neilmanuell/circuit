@@ -1,16 +1,16 @@
 package circuit.base
 {
-import circuit.api.Circuit;
-import circuit.core.BreakerOperate;
+import circuit.api.Node;
+import circuit.core.BreakerEdgeOperate;
 
 import net.lists.LinkedList;
 import net.lists.nodes.ListNode;
 
 public class CircuitRetriever
 {
-    private var _clientCircuit:Circuit;
+    private var _clientCircuit:Node;
 
-    public function CircuitRetriever( clientCircuit:Circuit )
+    public function CircuitRetriever( clientCircuit:Node )
     {
         _clientCircuit = clientCircuit;
 
@@ -22,7 +22,7 @@ public class CircuitRetriever
 
         for ( var node:ListNode = breakers.head; node; node = node.next )
         {
-            const breaker:BreakerOperate = node.data;
+            const breaker:BreakerEdgeOperate = node.data;
             if ( breaker.isClosed && !list.has( breaker ) )
                 list.add( breaker.getOtherCircuit( _clientCircuit ) );
         }

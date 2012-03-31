@@ -1,19 +1,19 @@
 package circuit.base
 {
-import circuit.api.Circuit;
+import circuit.api.Node;
 
 internal class CircuitPair
 {
-    private var _a:Circuit;
-    private var _b:Circuit;
+    private var _a:Node;
+    private var _b:Node;
 
-    public function CircuitPair( a:Circuit, b:Circuit ):void
+    public function CircuitPair( a:Node, b:Node ):void
     {
         _a = a;
         _b = b;
     }
 
-    public function getOtherCircuit( thisCircuit:Circuit ):Circuit
+    public function getOtherCircuit( thisCircuit:Node ):Node
     {
         if ( thisCircuit === _a )
             return _b;
@@ -24,7 +24,7 @@ internal class CircuitPair
         return NULL_CIRCUIT;
     }
 
-    public function has( circuit:Circuit ):Boolean
+    public function has( circuit:Node ):Boolean
     {
         return( _a === circuit || _b == circuit);
     }

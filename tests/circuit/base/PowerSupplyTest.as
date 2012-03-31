@@ -1,7 +1,7 @@
 package circuit.base
 {
-import circuit.api.PowerSupply;
-import circuit.core.CircuitOperate;
+import circuit.api.Supply;
+import circuit.core.CircuitNodeOperate;
 import circuit.signals.PowerSupplyChangedSignal;
 
 import org.hamcrest.assertThat;
@@ -14,7 +14,7 @@ public class PowerSupplyTest
 {
     private var _received:Boolean = false;
     private var _classUnderTest:SimplePowerSupply;
-    private var _id:String = "testPS" ;
+    private var _id:String = "testPS";
 
     [Before]
     public function before():void
@@ -52,7 +52,7 @@ public class PowerSupplyTest
     [Test]
     public function circuit_setter():void
     {
-        const expected:CircuitOperate = new CircuitNode("testCircuit");
+        const expected:CircuitNodeOperate = new SimpleCircuitNode( "testCircuit" );
         _classUnderTest.circuit = expected;
         assertThat( _classUnderTest.circuit, strictlyEqualTo( expected ) );
     }
@@ -98,7 +98,7 @@ public class PowerSupplyTest
     }
 
 
-    private function powerSupplyListener( power:PowerSupply ):void
+    private function powerSupplyListener( power:Supply ):void
     {
         _received = true;
     }

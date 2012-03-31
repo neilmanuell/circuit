@@ -1,10 +1,11 @@
 package circuit.core
 {
-import circuit.api.PowerSupply;
+import circuit.api.Supply;
 
-public interface PowerSupplyConfig     extends PowerSupply
+public interface PowerSupplyConfig extends Supply
 {
-    function get circuit():CircuitOperate;
-    function set circuit( value:CircuitOperate ):void;
+    function get circuit():CircuitNodeOperate;
+
+    function set circuit( value:CircuitNodeOperate ):void;
 }
 }

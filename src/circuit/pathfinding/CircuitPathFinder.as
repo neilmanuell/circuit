@@ -1,7 +1,7 @@
 package circuit.pathfinding
 {
 import circuit.base.*;
-import circuit.core.CircuitOperate;
+import circuit.core.CircuitNodeOperate;
 import circuit.core.PowerSupplyConfig;
 
 import net.lists.LinkedList;
@@ -30,7 +30,7 @@ public class CircuitPathFinder
     {
         for ( var node:ListNode = _circuitList.head; node; node = node.next )
         {
-            const circuit:CircuitOperate = node.data;
+            const circuit:CircuitNodeOperate = node.data;
             const connectedCircuits:LinkedList = circuit.getConnectedCircuits();
             addConnectedCircuits( connectedCircuits );
         }
@@ -40,7 +40,7 @@ public class CircuitPathFinder
     {
         for ( var node:ListNode = connectedCircuits.head; node; node = node.next )
         {
-            const circuit:CircuitOperate = node.data;
+            const circuit:CircuitNodeOperate = node.data;
             if ( !_circuitList.has( circuit ) )
                 _circuitList.add( circuit );
         }

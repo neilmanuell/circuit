@@ -1,6 +1,6 @@
 package circuit.boards
 {
-import circuit.api.Circuit;
+import circuit.api.Node;
 
 public class CircuitBoardTest_WithRules_B extends BaseCircuitBoardTest
 {
@@ -19,28 +19,27 @@ public class CircuitBoardTest_WithRules_B extends BaseCircuitBoardTest
         switchOnPowerSupplyOne();
         switchOnPowerSupplyTwo();
         assembleBoard();
-        _circuitD.onStateChanged.add( onCircuitDChange ) ;
-        _circuitE.onStateChanged.add( onCircuitEChange ) ;
+        _circuitD.onStateChanged.add( onCircuitDChange );
+        _circuitE.onStateChanged.add( onCircuitEChange );
 
         switchOffPowerSupplyTwo();
 
 
     }
 
-    private function onCircuitDChange( circuit:Circuit ):void
+    private function onCircuitDChange( circuit:Node ):void
     {
         if ( !circuit.isLive )
             _breakerAD.close();
 
 
-
     }
-    private function onCircuitEChange( circuit:Circuit ):void
+
+    private function onCircuitEChange( circuit:Node ):void
     {
         if ( !circuit.isLive )
             _breakerDE.open();
     }
-
 
 
 }

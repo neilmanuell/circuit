@@ -1,17 +1,17 @@
 package circuit.signals
 {
-import circuit.api.PowerSupply;
+import circuit.api.Supply;
 
 import net.richardlord.ash.signals.Signal1;
 
 public class PowerSupplyChangedSignal extends Signal1
 {
-    public function PowerSupplyChangedSignal(  )
+    public function PowerSupplyChangedSignal()
     {
-        super( PowerSupply );
+        super( Supply );
     }
 
-    public function dispatchPowerSupply( value:PowerSupply ):void
+    public function dispatchPowerSupply( value:Supply ):void
     {
         dispatch( value );
     }

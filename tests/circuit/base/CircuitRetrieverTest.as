@@ -10,13 +10,13 @@ public class CircuitRetrieverTest
 {
     private var _breakerLinkedList:LinkedList
     private var _classUnderTest:CircuitRetriever;
-    private var _circuitA:CircuitNode;
-    private var _circuitB:CircuitNode;
-    private var _circuitC:CircuitNode;
-    private var _circuitD:CircuitNode;
-    private var _breakerAB:BreakerEdge;
-    private var _breakerAC:BreakerEdge;
-    private var _breakerAD:BreakerEdge;
+    private var _circuitA:SimpleCircuitNode;
+    private var _circuitB:SimpleCircuitNode;
+    private var _circuitC:SimpleCircuitNode;
+    private var _circuitD:SimpleCircuitNode;
+    private var _breakerAB:SimpleBreakerEdge;
+    private var _breakerAC:SimpleBreakerEdge;
+    private var _breakerAD:SimpleBreakerEdge;
 
 
     [Before]
@@ -84,14 +84,14 @@ public class CircuitRetrieverTest
 
     private function configureCircuitBoard():void
     {
-        _circuitA = new CircuitNode("A");
-        _circuitB = new CircuitNode("B");
-        _circuitC = new CircuitNode("C");
-        _circuitD = new CircuitNode("D");
+        _circuitA = new SimpleCircuitNode( "A" );
+        _circuitB = new SimpleCircuitNode( "B" );
+        _circuitC = new SimpleCircuitNode( "C" );
+        _circuitD = new SimpleCircuitNode( "D" );
 
-        _breakerAB = new BreakerEdge( "AB", _circuitA, _circuitB );
-        _breakerAC = new BreakerEdge( "AC",_circuitA, _circuitC );
-        _breakerAD = new BreakerEdge( "AD",_circuitA, _circuitD );
+        _breakerAB = new SimpleBreakerEdge( "AB", _circuitA, _circuitB );
+        _breakerAC = new SimpleBreakerEdge( "AC", _circuitA, _circuitC );
+        _breakerAD = new SimpleBreakerEdge( "AD", _circuitA, _circuitD );
 
         _circuitA.add( _breakerAB );
         _circuitA.add( _breakerAC );
@@ -104,7 +104,7 @@ public class CircuitRetrieverTest
         _breakerLinkedList = new LinkedList();
         _breakerLinkedList.add( _breakerAB );
         _breakerLinkedList.add( _breakerAC );
-        _breakerLinkedList.add( _breakerAD )  ;
+        _breakerLinkedList.add( _breakerAD );
     }
 
     private function assertLinkList( received:LinkedList, toMatch:Array ):void

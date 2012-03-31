@@ -12,16 +12,16 @@ public class BaseCircuitPathFinderTest
     private var _powerOne:SimplePowerSupply;
     private var _powerTwo:SimplePowerSupply;
 
-    private var _circuitA:CircuitNode;
-    private var _circuitB:CircuitNode;
-    private var _circuitC:CircuitNode;
-    private var _circuitD:CircuitNode;
-    private var _circuitE:CircuitNode;
+    private var _circuitA:SimpleCircuitNode;
+    private var _circuitB:SimpleCircuitNode;
+    private var _circuitC:SimpleCircuitNode;
+    private var _circuitD:SimpleCircuitNode;
+    private var _circuitE:SimpleCircuitNode;
 
-    private var _breakerAB:BreakerEdge;
-    private var _breakerAC:BreakerEdge;
-    private var _breakerAD:BreakerEdge;
-    private var _breakerDE:BreakerEdge;
+    private var _breakerAB:SimpleBreakerEdge;
+    private var _breakerAC:SimpleBreakerEdge;
+    private var _breakerAD:SimpleBreakerEdge;
+    private var _breakerDE:SimpleBreakerEdge;
 
     private var _circuitList:LinkedList;
     private var _circuitOperateList:CircuitOperateList;
@@ -100,16 +100,16 @@ public class BaseCircuitPathFinderTest
 
     private function createData():void
     {
-        _circuitA = new CircuitNode("A");
-        _circuitB = new CircuitNode("B");
-        _circuitC = new CircuitNode("C");
-        _circuitD = new CircuitNode("D");
-        _circuitE = new CircuitNode("E");
+        _circuitA = new SimpleCircuitNode( "A" );
+        _circuitB = new SimpleCircuitNode( "B" );
+        _circuitC = new SimpleCircuitNode( "C" );
+        _circuitD = new SimpleCircuitNode( "D" );
+        _circuitE = new SimpleCircuitNode( "E" );
 
-        _breakerAB = new BreakerEdge( "AB",_circuitA, _circuitB );
-        _breakerAC = new BreakerEdge( "AC",_circuitA, _circuitC );
-        _breakerAD = new BreakerEdge( "AD",_circuitA, _circuitD );
-        _breakerDE = new BreakerEdge( "DE",_circuitD, _circuitE );
+        _breakerAB = new SimpleBreakerEdge( "AB", _circuitA, _circuitB );
+        _breakerAC = new SimpleBreakerEdge( "AC", _circuitA, _circuitC );
+        _breakerAD = new SimpleBreakerEdge( "AD", _circuitA, _circuitD );
+        _breakerDE = new SimpleBreakerEdge( "DE", _circuitD, _circuitE );
 
         _circuitA.add( _breakerAB );
         _circuitA.add( _breakerAC );
@@ -123,8 +123,8 @@ public class BaseCircuitPathFinderTest
 
         _circuitE.add( _breakerDE );
 
-        _powerOne = new SimplePowerSupply( "SP1",_circuitB );
-        _powerTwo = new SimplePowerSupply( "SP2",_circuitE );
+        _powerOne = new SimplePowerSupply( "SP1", _circuitB );
+        _powerTwo = new SimplePowerSupply( "SP2", _circuitE );
 
         _circuitList = new LinkedList();
         _circuitList.add( _circuitA );

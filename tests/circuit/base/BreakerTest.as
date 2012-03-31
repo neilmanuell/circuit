@@ -1,8 +1,7 @@
 package circuit.base
 {
-import circuit.api.Breaker;
-import circuit.api.Circuit;
-import circuit.base.BreakerEdge;
+import circuit.api.Edge;
+import circuit.api.Node;
 import circuit.signals.BreakerStateChangedSignal;
 
 import flash.events.Event;
@@ -19,28 +18,28 @@ import org.hamcrest.object.strictlyEqualTo;
 
 public class BreakerTest
 {
-    private var _circuitA:Circuit;
-    private var _circuitB:Circuit;
-    private var _circuitUnknown:Circuit;
-    private var _classUnderTest:BreakerEdge;
+    private var _circuitA:Node;
+    private var _circuitB:Node;
+    private var _circuitUnknown:Node;
+    private var _classUnderTest:SimpleBreakerEdge;
     private var _received:Boolean;
-    private var _id:String = "testBreaker"  ;
+    private var _id:String = "testBreaker";
 
     [Before(order=1, async, timeout=5000)]
     public function prepareMockolates():void
     {
         Async.proceedOnEvent( this,
-                prepare( Circuit ),
+                prepare( Node ),
                 Event.COMPLETE );
     }
 
     [Before(order=2)]
     public function before():void
     {
-        _circuitA = nice( Circuit );
-        _circuitB = nice( Circuit );
-        _circuitUnknown = nice( Circuit );
-        _classUnderTest = new BreakerEdge(_id);
+        _circuitA = nice( Node );
+        _circuitB = nice( Node );
+        _circuitUnknown = nice( Node );
+        _classUnderTest = new SimpleBreakerEdge( _id );
         _received = false;
     }
 
@@ -178,7 +177,7 @@ public class BreakerTest
         assertThat( _received, isFalse() );
     }
 
-    private function breakerListener( breaker:Breaker ):void
+    private function breakerListener( breaker:Edge ):void
     {
         _received = true;
     }

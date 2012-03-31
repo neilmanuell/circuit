@@ -16,9 +16,9 @@ import org.hamcrest.assertThat;
 
 public class CircuitOperateListTest
 {
-    private var _circuitA:CircuitOperate;
-    private var _circuitB:CircuitOperate;
-    private var _circuitC:CircuitOperate;
+    private var _circuitA:CircuitNodeOperate;
+    private var _circuitB:CircuitNodeOperate;
+    private var _circuitC:CircuitNodeOperate;
     private var _received:Array;
     private var _classUnderTest:CircuitOperateList;
     private var _linkedList:LinkedList;
@@ -27,16 +27,16 @@ public class CircuitOperateListTest
     public function prepareMockolates():void
     {
         Async.proceedOnEvent( this,
-                prepare( CircuitOperate ),
+                prepare( CircuitNodeOperate ),
                 Event.COMPLETE );
     }
 
     [Before(order=2)]
     public function before():void
     {
-        _circuitA = nice( CircuitOperate );
-        _circuitB = nice( CircuitOperate );
-        _circuitC = nice( CircuitOperate );
+        _circuitA = nice( CircuitNodeOperate );
+        _circuitB = nice( CircuitNodeOperate );
+        _circuitC = nice( CircuitNodeOperate );
         _linkedList = new LinkedList();
         _received = [];
         _classUnderTest = new CircuitOperateList();

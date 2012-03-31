@@ -10,16 +10,16 @@ public class BaseCircuitBoardTest
     private var _powerOne:SimplePowerSupply;
     private var _powerTwo:SimplePowerSupply;
 
-    protected var _circuitA:CircuitNode;
-    protected var _circuitB:CircuitNode;
-    protected var _circuitC:CircuitNode;
-    protected var _circuitD:CircuitNode;
-    protected var _circuitE:CircuitNode;
+    protected var _circuitA:SimpleCircuitNode;
+    protected var _circuitB:SimpleCircuitNode;
+    protected var _circuitC:SimpleCircuitNode;
+    protected var _circuitD:SimpleCircuitNode;
+    protected var _circuitE:SimpleCircuitNode;
 
-    protected var _breakerAB:BreakerEdge;
-    protected var _breakerAC:BreakerEdge;
-    protected var _breakerAD:BreakerEdge;
-    protected var _breakerDE:BreakerEdge;
+    protected var _breakerAB:SimpleBreakerEdge;
+    protected var _breakerAC:SimpleBreakerEdge;
+    protected var _breakerAD:SimpleBreakerEdge;
+    protected var _breakerDE:SimpleBreakerEdge;
 
     private var _classUnderTest:SimpleCircuitBoard;
 
@@ -90,37 +90,35 @@ public class BaseCircuitBoardTest
 
     protected final function assembleBoard():void
     {
-        _classUnderTest.addBreaker( _breakerAB );
-        _classUnderTest.addBreaker( _breakerAC );
-        _classUnderTest.addBreaker( _breakerAD );
-        _classUnderTest.addBreaker( _breakerDE );
+        _classUnderTest.addEdge( _breakerAB );
+        _classUnderTest.addEdge( _breakerAC );
+        _classUnderTest.addEdge( _breakerAD );
+        _classUnderTest.addEdge( _breakerDE );
 
-        _classUnderTest.addCircuit( _circuitA );
-        _classUnderTest.addCircuit( _circuitB );
-        _classUnderTest.addCircuit( _circuitC );
-        _classUnderTest.addCircuit( _circuitD );
-        _classUnderTest.addCircuit( _circuitE );
+        _classUnderTest.addNode( _circuitA );
+        _classUnderTest.addNode( _circuitB );
+        _classUnderTest.addNode( _circuitC );
+        _classUnderTest.addNode( _circuitD );
+        _classUnderTest.addNode( _circuitE );
 
-        _classUnderTest.addPowerSupply( _powerOne );
-        _classUnderTest.addPowerSupply( _powerTwo );
+        _classUnderTest.addSupply( _powerOne );
+        _classUnderTest.addSupply( _powerTwo );
         _classUnderTest.activate();
     }
 
 
-
-
     private function createData():void
     {
-        _circuitA = new CircuitNode( "A" );
-        _circuitB = new CircuitNode( "B" );
-        _circuitC = new CircuitNode( "C" );
-        _circuitD = new CircuitNode( "D" );
-        _circuitE = new CircuitNode( "E" );
+        _circuitA = new SimpleCircuitNode( "A" );
+        _circuitB = new SimpleCircuitNode( "B" );
+        _circuitC = new SimpleCircuitNode( "C" );
+        _circuitD = new SimpleCircuitNode( "D" );
+        _circuitE = new SimpleCircuitNode( "E" );
 
-        _breakerAB = new BreakerEdge( "AB",_circuitA, _circuitB );
-        _breakerAC = new BreakerEdge( "AC",_circuitA, _circuitC );
-        _breakerAD = new BreakerEdge( "AD", _circuitA, _circuitD );
-        _breakerDE = new BreakerEdge( "AE", _circuitD, _circuitE );
+        _breakerAB = new SimpleBreakerEdge( "AB", _circuitA, _circuitB );
+        _breakerAC = new SimpleBreakerEdge( "AC", _circuitA, _circuitC );
+        _breakerAD = new SimpleBreakerEdge( "AD", _circuitA, _circuitD );
+        _breakerDE = new SimpleBreakerEdge( "AE", _circuitD, _circuitE );
 
         _circuitA.add( _breakerAB );
         _circuitA.add( _breakerAC );
@@ -134,8 +132,8 @@ public class BaseCircuitBoardTest
 
         _circuitE.add( _breakerDE );
 
-        _powerOne = new SimplePowerSupply( "PS1",_circuitB );
-        _powerTwo = new SimplePowerSupply( "PS2",_circuitE );
+        _powerOne = new SimplePowerSupply( "PS1", _circuitB );
+        _powerTwo = new SimplePowerSupply( "PS2", _circuitE );
 
 
     }

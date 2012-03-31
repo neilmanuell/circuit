@@ -1,17 +1,17 @@
 package circuit.signals
 {
-import circuit.api.Breaker;
+import circuit.api.Edge;
 
 import net.richardlord.ash.signals.Signal1;
 
 public class BreakerStateChangedSignal extends Signal1
 {
-    public function BreakerStateChangedSignal(  )
+    public function BreakerStateChangedSignal()
     {
-        super( Breaker );
+        super( Edge );
     }
 
-    public function dispatchBreaker( value:Breaker ):void
+    public function dispatchBreaker( value:Edge ):void
     {
         dispatch( value );
     }
