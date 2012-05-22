@@ -5,6 +5,7 @@ import circuit.api.Node;
 import circuit.api.Supply;
 
 import org.hamcrest.assertThat;
+import org.hamcrest.core.not;
 import org.hamcrest.object.instanceOf;
 import org.hamcrest.object.isTrue;
 import org.hamcrest.object.strictlyEqualTo;
@@ -82,29 +83,40 @@ public class CircuitBoardConfigTest
     }
 
     [Test]
-    public function getSuppleyInstance_returns_instanceOf_Supply():void
+    public function getSupplyInstance_returns_instanceOf_Supply():void
     {
-        assertThat( _classUnderTest.getSuppleyInstance( TEST ), instanceOf( Supply ) );
+        assertThat( _classUnderTest.getSupplyInstance( TEST ), instanceOf( Supply ) );
     }
 
     [Test]
-    public function getSuppleyInstance_returns_Supply_with_passed_ID():void
+    public function getSupplyInstance_returns_Supply_with_passed_ID():void
     {
-        assertThat( _classUnderTest.getSuppleyInstance( TEST ).id, TEST );
+        assertThat( _classUnderTest.getSupplyInstance( TEST ).id, TEST );
     }
 
     [Test]
-    public function getSuppleyInstance_registers_Supply():void
+    public function getSupplyInstance_registers_Supply():void
     {
-        const supply:Supply = _classUnderTest.getSuppleyInstance( TEST );
+        const supply:Supply = _classUnderTest.getSupplyInstance( TEST );
         assertThat( _classUnderTest.hasSupply( supply ), isTrue() );
     }
 
     [Test]
-    public function getSuppleyInstance_returns_same_Supply_inst():void
+    public function getSupplyInstance_returns_same_Supply_inst():void
     {
-        const supply:Supply = _classUnderTest.getSuppleyInstance( TEST );
-        assertThat( supply,  strictlyEqualTo( _classUnderTest.getSuppleyInstance( TEST ) ) );
+        const supply:Supply = _classUnderTest.getSupplyInstance( TEST );
+        assertThat( supply,  strictlyEqualTo( _classUnderTest.getSupplyInstance( TEST ) ) );
+    }
+
+    [Test]
+    public function Nodes_Edges_Supplies_are_mapped_with_different_namespaces():void
+    {
+        const node:Node = _classUnderTest.getNodeInstance( TEST );
+        const edge:Edge = _classUnderTest.getEdgeInstance( TEST );
+        const supply:Supply = _classUnderTest.getSupplyInstance( TEST );
+        assertThat( node,  not( edge ) );
+        assertThat( edge,  not( supply ) );
+        assertThat( node,  not( supply ) );
     }
 }
 }

@@ -6,6 +6,6 @@ public interface CircuitBoardConfig
 
     function getNodeInstance( id:String ):Node
 
-    function getSuppleyInstance( id:String ):Supply;
+    function getSupplyInstance( id:String ):Supply;
 }
 }

@@ -25,13 +25,17 @@ public class SimpleCircuitBoard implements CircuitBoard, CircuitBoardConfig
     private const _pathfinder:CircuitPathFinder = new CircuitPathFinder();
     private var _hasChanged:Boolean = false;
     private var _isPathFinding:Boolean = false;
+    private const NODE_NAMESPACE:String = "node::";
+    private const EDGE_NAMESPACE:String = "edge::";
+    private const SUPPLY_NAMESPACE:String = "supply::";
 
 
     public function getEdgeInstance( id:String ):Edge
     {
-        if ( _map[id] != null )return  _map[id];
+        const key:String = EDGE_NAMESPACE + id;
+        if ( _map[key] != null )return  _map[key];
         const edge:Edge = new SimpleBreakerEdge( id );
-        _map[id] = edge;
+        _map[key] = edge;
         addEdge( edge );
         return edge;
     }
@@ -43,9 +47,10 @@ public class SimpleCircuitBoard implements CircuitBoard, CircuitBoardConfig
 
     public function getNodeInstance( id:String ):Node
     {
-        if ( _map[id] != null )return  _map[id];
+        const key:String = NODE_NAMESPACE + id;
+        if ( _map[key] != null )return  _map[key];
         const node:Node = new SimpleCircuitNode( id );
-        _map[id] = node;
+        _map[key] = node;
         addNode( node );
         return node;
     }
@@ -55,11 +60,12 @@ public class SimpleCircuitBoard implements CircuitBoard, CircuitBoardConfig
         return _nodes.has( node );
     }
 
-    public function getSuppleyInstance( id:String ):Supply
+    public function getSupplyInstance( id:String ):Supply
     {
-        if ( _map[id] != null )return  _map[id];
+        const key:String = SUPPLY_NAMESPACE + id;
+        if ( _map[key] != null )return  _map[key];
         const supply:Supply = new SimplePowerSupply( id );
-        _map[id] = supply;
+        _map[key] = supply;
         addSupply( supply );
         return supply
     }
