@@ -27,7 +27,7 @@ public class SimpleCircuitBoard implements CircuitBoard, CircuitBoardConfig
     private var _isPathFinding:Boolean = false;
 
 
-    public function createEdge( id:String ):Edge
+    public function getEdgeInstance( id:String ):Edge
     {
         if ( _map[id] != null )return  _map[id];
         const edge:Edge = new SimpleBreakerEdge( id );
@@ -41,7 +41,7 @@ public class SimpleCircuitBoard implements CircuitBoard, CircuitBoardConfig
         return _edges.has( edge );
     }
 
-    public function createNode( id:String ):Node
+    public function getNodeInstance( id:String ):Node
     {
         if ( _map[id] != null )return  _map[id];
         const node:Node = new SimpleCircuitNode( id );
@@ -55,7 +55,7 @@ public class SimpleCircuitBoard implements CircuitBoard, CircuitBoardConfig
         return _nodes.has( node );
     }
 
-    public function createSupply( id:String ):Supply
+    public function getSuppleyInstance( id:String ):Supply
     {
         if ( _map[id] != null )return  _map[id];
         const supply:Supply = new SimplePowerSupply( id );

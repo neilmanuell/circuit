@@ -30,81 +30,81 @@ public class CircuitBoardConfigTest
 
 
     [Test]
-    public function createNode_returns_instanceOf_Node():void
+    public function getNodeInstance_returns_instanceOf_Node():void
     {
-        assertThat( _classUnderTest.createNode( TEST ), instanceOf( Node ) )
+        assertThat( _classUnderTest.getNodeInstance( TEST ), instanceOf( Node ) )
     }
 
     [Test]
-    public function createNode_returns_Node_with_passed_ID():void
+    public function getNodeInstance_returns_Node_with_passed_ID():void
     {
-        assertThat( _classUnderTest.createNode( TEST ).id, TEST );
+        assertThat( _classUnderTest.getNodeInstance( TEST ).id, TEST );
     }
 
     [Test]
-    public function createNode_registers_Node():void
+    public function getNodeInstance_registers_Node():void
     {
-        const node:Node = _classUnderTest.createNode( TEST );
+        const node:Node = _classUnderTest.getNodeInstance( TEST );
         assertThat( _classUnderTest.hasNode( node ), isTrue() );
     }
 
     [Test]
-    public function createNode_returns_same_Node_inst():void
+    public function getNodeInstance_returns_same_Node_inst():void
     {
-        const node:Node = _classUnderTest.createNode( TEST );
-        assertThat( node,  strictlyEqualTo( _classUnderTest.createNode( TEST ) ) );
+        const node:Node = _classUnderTest.getNodeInstance( TEST );
+        assertThat( node,  strictlyEqualTo( _classUnderTest.getNodeInstance( TEST ) ) );
     }
 
     [Test]
-    public function createEdge_returns_instanceOf_Edge():void
+    public function getEdgeInstance_returns_instanceOf_Edge():void
     {
-        assertThat( _classUnderTest.createEdge( TEST ), instanceOf( Edge ) )
+        assertThat( _classUnderTest.getEdgeInstance( TEST ), instanceOf( Edge ) )
     }
 
     [Test]
-    public function createEdge_returns_Edge_with_passed_ID():void
+    public function getEdgeInstance_returns_Edge_with_passed_ID():void
     {
-        assertThat( _classUnderTest.createEdge( TEST ).id, TEST );
+        assertThat( _classUnderTest.getEdgeInstance( TEST ).id, TEST );
     }
 
     [Test]
-    public function createEdge_registers_Edge():void
+    public function getEdgeInstance_registers_Edge():void
     {
-        const edge:Edge = _classUnderTest.createEdge( TEST );
+        const edge:Edge = _classUnderTest.getEdgeInstance( TEST );
         assertThat( _classUnderTest.hasEdge( edge ), isTrue() );
     }
 
     [Test]
-    public function createEdge_returns_same_Edge_inst():void
+    public function getEdgeInstance_returns_same_Edge_inst():void
     {
-        const edge:Edge = _classUnderTest.createEdge( TEST );
-        assertThat( edge,  strictlyEqualTo( _classUnderTest.createEdge( TEST ) ) );
+        const edge:Edge = _classUnderTest.getEdgeInstance( TEST );
+        assertThat( edge,  strictlyEqualTo( _classUnderTest.getEdgeInstance( TEST ) ) );
     }
 
     [Test]
-    public function createSupply_returns_instanceOf_Supply():void
+    public function getSuppleyInstance_returns_instanceOf_Supply():void
     {
-        assertThat( _classUnderTest.createSupply( TEST ), instanceOf( Supply ) );
+        assertThat( _classUnderTest.getSuppleyInstance( TEST ), instanceOf( Supply ) );
     }
 
     [Test]
-    public function createSupply_returns_Supply_with_passed_ID():void
+    public function getSuppleyInstance_returns_Supply_with_passed_ID():void
     {
-        assertThat( _classUnderTest.createSupply( TEST ).id, TEST );
+        assertThat( _classUnderTest.getSuppleyInstance( TEST ).id, TEST );
     }
 
     [Test]
-    public function createSupply_registers_Supply():void
+    public function getSuppleyInstance_registers_Supply():void
     {
-        const supply:Supply = _classUnderTest.createSupply( TEST );
+        const supply:Supply = _classUnderTest.getSuppleyInstance( TEST );
         assertThat( _classUnderTest.hasSupply( supply ), isTrue() );
     }
 
     [Test]
-    public function createSupply_returns_same_Supply_inst():void
+    public function getSuppleyInstance_returns_same_Supply_inst():void
     {
-        const supply:Supply = _classUnderTest.createSupply( TEST );
-        assertThat( supply,  strictlyEqualTo( _classUnderTest.createSupply( TEST ) ) );
+        const supply:Supply = _classUnderTest.getSuppleyInstance( TEST );
+        assertThat( supply,  strictlyEqualTo( _classUnderTest.getSuppleyInstance( TEST ) ) );
     }
 }
 }

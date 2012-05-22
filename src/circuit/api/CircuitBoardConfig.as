@@ -2,10 +2,10 @@ package circuit.api
 {
 public interface CircuitBoardConfig
 {
-    function createEdge( id:String ):Edge
+    function getEdgeInstance( id:String ):Edge
 
-    function createNode( id:String ):Node
+    function getNodeInstance( id:String ):Node
 
-    function createSupply( id:String ):Supply;
+    function getSuppleyInstance( id:String ):Supply;
 }
 }
