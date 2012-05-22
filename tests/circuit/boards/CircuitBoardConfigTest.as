@@ -7,6 +7,7 @@ import circuit.api.Supply;
 import org.hamcrest.assertThat;
 import org.hamcrest.object.instanceOf;
 import org.hamcrest.object.isTrue;
+import org.hamcrest.object.strictlyEqualTo;
 
 public class CircuitBoardConfigTest
 {
@@ -48,6 +49,13 @@ public class CircuitBoardConfigTest
     }
 
     [Test]
+    public function createNode_returns_same_Node_inst():void
+    {
+        const node:Node = _classUnderTest.createNode( TEST );
+        assertThat( node,  strictlyEqualTo( _classUnderTest.createNode( TEST ) ) );
+    }
+
+    [Test]
     public function createEdge_returns_instanceOf_Edge():void
     {
         assertThat( _classUnderTest.createEdge( TEST ), instanceOf( Edge ) )
@@ -67,6 +75,13 @@ public class CircuitBoardConfigTest
     }
 
     [Test]
+    public function createEdge_returns_same_Edge_inst():void
+    {
+        const edge:Edge = _classUnderTest.createEdge( TEST );
+        assertThat( edge,  strictlyEqualTo( _classUnderTest.createEdge( TEST ) ) );
+    }
+
+    [Test]
     public function createSupply_returns_instanceOf_Supply():void
     {
         assertThat( _classUnderTest.createSupply( TEST ), instanceOf( Supply ) );
@@ -83,6 +98,13 @@ public class CircuitBoardConfigTest
     {
         const supply:Supply = _classUnderTest.createSupply( TEST );
         assertThat( _classUnderTest.hasSupply( supply ), isTrue() );
+    }
+
+    [Test]
+    public function createSupply_returns_same_Supply_inst():void
+    {
+        const supply:Supply = _classUnderTest.createSupply( TEST );
+        assertThat( supply,  strictlyEqualTo( _classUnderTest.createSupply( TEST ) ) );
     }
 }
 }

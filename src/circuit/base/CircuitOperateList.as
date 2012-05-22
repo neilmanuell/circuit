@@ -30,6 +30,14 @@ public class CircuitOperateList
         }
     }
 
+    public function dispatchAll():void
+    {
+        for ( var node:ListNode = _circuits.head; node; node = node.next )
+        {
+            node.data.dispatch();
+        }
+    }
+
     public function markAllAsConnected():void
     {
         for ( var node:ListNode = _circuits.head; node; node = node.next )

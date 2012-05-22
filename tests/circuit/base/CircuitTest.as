@@ -99,16 +99,17 @@ public class CircuitTest
     {
         _classUnderTest.onStateChanged.add( circuitListener );
         makeLive();
-
+        _classUnderTest.dispatch();
         assertThat( _received, isTrue() );
     }
 
     [Test]
-    public function onStateChanged_dispatches_on_isLive_change_false():void
+    public function onStateChanged_does_not_dispatch_on_isLive_change_false():void
     {
         makeLive();
         _classUnderTest.onStateChanged.add( circuitListener );
         makeDead();
+        _classUnderTest.dispatch();
 
         assertThat( _received, isTrue() );
     }
@@ -119,7 +120,7 @@ public class CircuitTest
         makeLive()
         _classUnderTest.onStateChanged.add( circuitListener );
         makeLive()
-
+        _classUnderTest.dispatch();
         assertThat( _received, isFalse() );
     }
 
@@ -129,7 +130,7 @@ public class CircuitTest
         makeDead();
         _classUnderTest.onStateChanged.add( circuitListener );
         makeDead();
-
+        _classUnderTest.dispatch();
         assertThat( _received, isFalse() );
     }
 

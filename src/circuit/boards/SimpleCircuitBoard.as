@@ -11,10 +11,13 @@ import circuit.base.SimplePowerSupply;
 import circuit.core.CircuitBoard;
 import circuit.pathfinding.CircuitPathFinder;
 
+import flash.utils.Dictionary;
+
 import net.lists.LinkedList;
 
 public class SimpleCircuitBoard implements CircuitBoard, CircuitBoardConfig
 {
+    private const _map:Dictionary = new Dictionary( false );
     private const _edges:LinkedList = new LinkedList();
     private const _nodes:LinkedList = new LinkedList();
     private const _supplies:LinkedList = new LinkedList();
@@ -26,7 +29,9 @@ public class SimpleCircuitBoard implements CircuitBoard, CircuitBoardConfig
 
     public function createEdge( id:String ):Edge
     {
+        if ( _map[id] != null )return  _map[id];
         const edge:Edge = new SimpleBreakerEdge( id );
+        _map[id] = edge;
         addEdge( edge );
         return edge;
     }
@@ -38,7 +43,9 @@ public class SimpleCircuitBoard implements CircuitBoard, CircuitBoardConfig
 
     public function createNode( id:String ):Node
     {
+        if ( _map[id] != null )return  _map[id];
         const node:Node = new SimpleCircuitNode( id );
+        _map[id] = node;
         addNode( node );
         return node;
     }
@@ -50,7 +57,9 @@ public class SimpleCircuitBoard implements CircuitBoard, CircuitBoardConfig
 
     public function createSupply( id:String ):Supply
     {
+        if ( _map[id] != null )return  _map[id];
         const supply:Supply = new SimplePowerSupply( id );
+        _map[id] = supply;
         addSupply( supply );
         return supply
     }
@@ -74,6 +83,7 @@ public class SimpleCircuitBoard implements CircuitBoard, CircuitBoardConfig
         _pathfinder.findConnectionsFromPowerSupplies( _supplies );
         _pathfinder.reset();
         _circuitOperateList.validateAll();
+        _circuitOperateList.dispatchAll();
         _isPathFinding = false;
 
     }
