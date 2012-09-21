@@ -5,6 +5,8 @@ import circuit.core.BreakerEdgeConfig;
 import circuit.core.BreakerEdgeOperate;
 import circuit.signals.BreakerStateChangedSignal;
 
+import net.richardlord.ash.signals.Signal1;
+
 public class SimpleBreakerEdge implements BreakerEdgeOperate, BreakerEdgeConfig
 {
     private var _isClosed:Boolean = true;
@@ -15,10 +17,10 @@ public class SimpleBreakerEdge implements BreakerEdgeOperate, BreakerEdgeConfig
     public function SimpleBreakerEdge( id:String, a:Node = null, b:Node = null )
     {
         _id = id;
-        if( a != null && b != null )add( a, b );
+        if ( a != null && b != null )add( a, b );
     }
 
-    public function get onStateChanged():BreakerStateChangedSignal
+    public function get onStateChanged():Signal1
     {
         return _onStateChanged;
     }
@@ -57,7 +59,7 @@ public class SimpleBreakerEdge implements BreakerEdgeOperate, BreakerEdgeConfig
 
     public function getOtherCircuit( thisCircuit:Node ):Node
     {
-        if ( _circuitPair == null )return NULL_CIRCUIT;
+        if ( _circuitPair == null )return NULL_NODE;
         return _circuitPair.getOtherCircuit( thisCircuit );
     }
 

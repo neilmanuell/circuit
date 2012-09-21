@@ -5,6 +5,7 @@ import net.lists.nodes.ListNode;
 
 import org.hamcrest.assertThat;
 import org.hamcrest.core.not;
+import org.hamcrest.object.equalTo;
 
 public class CircuitRetrieverTest
 {
@@ -14,6 +15,7 @@ public class CircuitRetrieverTest
     private var _circuitB:SimpleCircuitNode;
     private var _circuitC:SimpleCircuitNode;
     private var _circuitD:SimpleCircuitNode;
+    private var _circuitE:SimpleCircuitNode;
     private var _breakerAB:SimpleBreakerEdge;
     private var _breakerAC:SimpleBreakerEdge;
     private var _breakerAD:SimpleBreakerEdge;
@@ -43,7 +45,7 @@ public class CircuitRetrieverTest
 
         const received:LinkedList = _classUnderTest.getConnectedCircuits( _breakerLinkedList );
 
-        assertLinkList( received, [ _circuitB, _circuitC ] );
+        assertLinkList( received, [ _circuitB, _circuitC, _circuitE  ] );
     }
 
 
@@ -55,7 +57,7 @@ public class CircuitRetrieverTest
         _breakerAD.close();
         const received:LinkedList = _classUnderTest.getConnectedCircuits( _breakerLinkedList );
 
-        assertLinkList( received, [ _circuitD ] );
+        assertLinkList( received, [ _circuitD, _circuitE ] );
     }
 
 
@@ -67,7 +69,7 @@ public class CircuitRetrieverTest
         _breakerAD.close();
         const received:LinkedList = _classUnderTest.getConnectedCircuits( _breakerLinkedList );
 
-        assertLinkList( received, [ _circuitB, _circuitC, _circuitD ] );
+        assertLinkList( received, [ _circuitB, _circuitC, _circuitD, _circuitE ] );
     }
 
     [Test]
@@ -78,7 +80,7 @@ public class CircuitRetrieverTest
         _breakerAD.open();
         const received:LinkedList = _classUnderTest.getConnectedCircuits( _breakerLinkedList );
 
-        assertLinkList( received, [  ] );
+        assertLinkList( received, [  _circuitE ] );
     }
 
 
@@ -88,20 +90,14 @@ public class CircuitRetrieverTest
         _circuitB = new SimpleCircuitNode( "B" );
         _circuitC = new SimpleCircuitNode( "C" );
         _circuitD = new SimpleCircuitNode( "D" );
+        _circuitE = new SimpleCircuitNode( "E" );
 
         _breakerAB = new SimpleBreakerEdge( "AB", _circuitA, _circuitB );
         _breakerAC = new SimpleBreakerEdge( "AC", _circuitA, _circuitC );
         _breakerAD = new SimpleBreakerEdge( "AD", _circuitA, _circuitD );
 
-        _circuitA.add( _breakerAB );
-        _circuitA.add( _breakerAC );
-        _circuitA.add( _breakerAD );
-
-        _circuitB.add( _breakerAB );
-        _circuitC.add( _breakerAC );
-        _circuitD.add( _breakerAD );
-
         _breakerLinkedList = new LinkedList();
+        _breakerLinkedList.add( _circuitE );
         _breakerLinkedList.add( _breakerAB );
         _breakerLinkedList.add( _breakerAC );
         _breakerLinkedList.add( _breakerAD );
@@ -109,10 +105,15 @@ public class CircuitRetrieverTest
 
     private function assertLinkList( received:LinkedList, toMatch:Array ):void
     {
+        var count:int = 0;
+
         for ( var node:ListNode = received.head; node; node = node.next )
         {
+            count++;
             assertThat( toMatch.indexOf( node.data ), not( -1 ) );
         }
+
+        assertThat( count, equalTo( toMatch.length ) )
     }
 
 

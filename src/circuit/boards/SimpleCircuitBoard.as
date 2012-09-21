@@ -25,9 +25,9 @@ public class SimpleCircuitBoard implements CircuitBoard, CircuitBoardConfig
     private const _pathfinder:CircuitPathFinder = new CircuitPathFinder();
     private var _hasChanged:Boolean = false;
     private var _isPathFinding:Boolean = false;
-    private const NODE_NAMESPACE:String = "node::";
-    private const EDGE_NAMESPACE:String = "edge::";
-    private const SUPPLY_NAMESPACE:String = "supply::";
+    private const NODE_NAMESPACE:String = "node:";
+    private const EDGE_NAMESPACE:String = "edge:";
+    private const SUPPLY_NAMESPACE:String = "supply:";
 
 
     public function getEdgeInstance( id:String ):Edge

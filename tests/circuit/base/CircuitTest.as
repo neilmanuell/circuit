@@ -71,21 +71,21 @@ public class CircuitTest
     [Test]
     public function add_registers_breaker():void
     {
-        _classUnderTest.add( _breakerA );
-        assertThat( _classUnderTest.has( _breakerA ), isTrue() );
+        _classUnderTest.add( null );
+        assertThat( _classUnderTest.has( null ), isTrue() );
     }
 
     [Test]
     public function successful_add_returns_true():void
     {
-        assertThat( _classUnderTest.add( _breakerA ), isTrue() );
+        assertThat( _classUnderTest.add( null ), isTrue() );
     }
 
     [Test]
     public function duplicate_add_returns_false():void
     {
-        _classUnderTest.add( _breakerA );
-        assertThat( _classUnderTest.add( _breakerA ), isFalse() );
+        _classUnderTest.add( null );
+        assertThat( _classUnderTest.add( null ), isFalse() );
     }
 
     [Test]

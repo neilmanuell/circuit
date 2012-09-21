@@ -46,7 +46,7 @@ public class PowerSupplyTest
     [Test]
     public function circuit__by_default_is_NULL_CIRCUIT():void
     {
-        assertThat( _classUnderTest.circuit, strictlyEqualTo( NULL_CIRCUIT ) );
+        assertThat( _classUnderTest.circuit, strictlyEqualTo( NULL_NODE ) );
     }
 
     [Test]

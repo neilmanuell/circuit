@@ -16,15 +16,17 @@ public class CircuitRetriever
 
     }
 
-    public function getConnectedCircuits( breakers:LinkedList ):LinkedList
+    public function getConnectedCircuits( elements:LinkedList ):LinkedList
     {
         const list:LinkedList = new LinkedList();
 
-        for ( var node:ListNode = breakers.head; node; node = node.next )
+        for ( var node:ListNode = elements.head; node; node = node.next )
         {
-            const breaker:BreakerEdgeOperate = node.data;
-            if ( breaker.isClosed && !list.has( breaker ) )
-                list.add( breaker.getOtherCircuit( _clientCircuit ) );
+            const breaker:BreakerEdgeOperate = node.data as BreakerEdgeOperate;
+            if ( breaker != null && breaker.isClosed && !list.has( breaker ) )
+                list.add( breaker.getOtherCircuit( _clientCircuit ) )
+            else if ( node.data is Node )
+                list.add( node.data );
         }
 
         return list;

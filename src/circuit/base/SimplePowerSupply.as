@@ -4,11 +4,13 @@ import circuit.core.CircuitNodeOperate;
 import circuit.core.PowerSupplyConfig;
 import circuit.signals.PowerSupplyChangedSignal;
 
+import net.richardlord.ash.signals.Signal1;
+
 public class SimplePowerSupply implements PowerSupplyConfig
 {
 
     private var _isOn:Boolean = false;
-    private var _circuit:CircuitNodeOperate = NULL_CIRCUIT;
+    private var _circuit:CircuitNodeOperate = NULL_NODE;
     private const _onStateChanged:PowerSupplyChangedSignal = new PowerSupplyChangedSignal();
     private var _id:String;
 
@@ -18,7 +20,7 @@ public class SimplePowerSupply implements PowerSupplyConfig
         if ( circuit != null ) _circuit = circuit;
     }
 
-    public function get onStateChanged():PowerSupplyChangedSignal
+    public function get onStateChanged():Signal1
     {
         return _onStateChanged;
     }

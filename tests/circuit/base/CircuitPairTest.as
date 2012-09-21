@@ -73,7 +73,7 @@ public class CircuitPairTest
     [Test]
     public function getOtherCircuit_give_unknown_returns_NULL_CIRCUIT():void
     {
-        assertThat( _classUnderTest.getOtherCircuit( _circuitUnknown ), strictlyEqualTo( NULL_CIRCUIT ) );
+        assertThat( _classUnderTest.getOtherCircuit( _circuitUnknown ), strictlyEqualTo( NULL_NODE ) );
     }
 
 

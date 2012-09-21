@@ -1,11 +1,12 @@
 package circuit.base
 {
-import circuit.api.Edge;
+import circuit.api.Element;
 import circuit.api.Node;
 import circuit.core.*;
 import circuit.signals.CircuitStateChangedSignal;
 
 import net.lists.LinkedList;
+import net.richardlord.ash.signals.Signal1;
 
 public class SimpleCircuitNode implements Node, CircuitNodeConfig, CircuitNodeOperate
 {
@@ -23,7 +24,7 @@ public class SimpleCircuitNode implements Node, CircuitNodeConfig, CircuitNodeOp
         _id = id;
     }
 
-    public function get onStateChanged():CircuitStateChangedSignal
+    public function get onStateChanged():Signal1
     {
         return _onStateChange;
     }
@@ -33,16 +34,16 @@ public class SimpleCircuitNode implements Node, CircuitNodeConfig, CircuitNodeOp
         return _isLive;
     }
 
-    public function add( breaker:Edge ):Boolean
+    public function add( element:Element ):Boolean
     {
-        if ( has( breaker ) ) return false;
-        _breakers.add( breaker );
+        if ( has( element ) ) return false;
+        _breakers.add( element );
         return true;
     }
 
-    public function has( breaker:Edge ):Boolean
+    public function has( element:Element ):Boolean
     {
-        return (_breakers.has( breaker ));
+        return (_breakers.has( element ));
     }
 
     public function invalidate():void

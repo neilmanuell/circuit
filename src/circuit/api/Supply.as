@@ -1,14 +1,14 @@
 package circuit.api
 {
-import circuit.signals.PowerSupplyChangedSignal;
+import net.richardlord.ash.signals.Signal1;
 
 public interface Supply
 {
-    function get onStateChanged():PowerSupplyChangedSignal
+    function get id():String
+
+    function get onStateChanged():Signal1
 
     function get isOn():Boolean;
-
-    function get id():String
 
     function switchOn():void;
 

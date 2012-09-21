@@ -4,9 +4,9 @@ import circuit.api.*;
 
 public interface CircuitNodeConfig
 {
-    function add( breaker:Edge ):Boolean
+    function add( element:Element ):Boolean
 
-    function has( breaker:Edge ):Boolean
+    function has( element:Element ):Boolean
 
 }
 }
